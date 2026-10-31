@@ -1,10 +1,11 @@
 import { useCallback, useMemo, useState, type ChangeEvent } from 'react'
 import Card from './Card'
+import { Spinner } from './Spinner'
 import useFetchPhotos from '../hooks/useFetchPhotos'
 import useFavourites from '../hooks/useFavourites'
 
 export default function Gallery() {
-  const { photos, error } = useFetchPhotos()
+  const { photos, loading, error } = useFetchPhotos()
   const { favourites, toggleFavourite } = useFavourites()
   const [query, setQuery] = useState('')
 
@@ -16,6 +17,14 @@ export default function Gallery() {
     const search = query.trim().toLowerCase()
     return photos.filter((photo) => photo.author.toLowerCase().includes(search))
   }, [photos, query])
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Spinner />
+      </div>
+    )
+  }
 
   if (error) {
     return (
