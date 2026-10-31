@@ -1,6 +1,10 @@
-export function Heart() {
+interface HeartProps {
+    filled?: boolean
+}
+
+export function Heart({ filled = false }: HeartProps) {
     return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-6 w-6">
+        <svg viewBox="0 0 24 24" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2} className="h-6 w-6">
             <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

@@ -1,9 +1,11 @@
 import { useCallback, useMemo, useState, type ChangeEvent } from 'react'
 import Card from './Card'
 import useFetchPhotos from '../hooks/useFetchPhotos'
+import useFavourites from '../hooks/useFavourites'
 
 export default function Gallery() {
   const { photos, error } = useFetchPhotos()
+  const { favourites, toggleFavourite } = useFavourites()
   const [query, setQuery] = useState('')
 
   const handleSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +37,13 @@ export default function Gallery() {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {filteredPhotos.map((photo) => (
-          <Card key={photo.id} url={`https://picsum.photos/id/${photo.id}/600/400`} author={photo.author} />
+          <Card
+            key={photo.id}
+            url={`https://picsum.photos/id/${photo.id}/600/400`}
+            author={photo.author}
+            isFavourite={favourites.includes(photo.id)}
+            onToggleFavourite={() => toggleFavourite(photo.id)}
+          />
         ))}
       </div>
     </div>
