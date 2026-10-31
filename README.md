@@ -1,32 +1,5 @@
-# React + TypeScript + Vite
+# React Photo Gallery
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A photo gallery built with React, Vite, TypeScript and Tailwind CSS. It fetches 30 photos from the [Picsum Photos API](https://picsum.photos), shows them in a responsive grid (1, 2 or 4 columns depending on screen size), filters them by author name as you type, and lets you mark photos as favourites. Favourites are managed with `useReducer` and saved in `localStorage`, so they survive a page refresh.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+To run it locally, install dependencies with `npm install` and start the dev server with `npm run dev`. The fetch logic lives in the `useFetchPhotos` hook, favourites in the `useFavourites` hook, and the search filter in the `Gallery` component, which uses `useCallback` for the input handler and `useMemo` for the filtered list.
